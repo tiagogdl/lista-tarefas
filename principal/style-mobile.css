@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(253, 209, 155);
+}
+
+main{
+    margin: auto;
+    background-color: white;
+    height: 90vh;
+    width: 90vw;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.281);
+    
+}
+
+h1{
+    text-align: center;
+}
+
+div {
+    text-align: justify;
+    margin-bottom: 10px;
+    margin: 10px;
+    padding: 10px;
+    max-height: 85%;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+div::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+input {
+    margin-left: 10px;
+    width: 100px;
+    font-size: 1.2em;
+    background-color: rgb(253, 209, 155);
+    border-radius: 10px;
+    border-color: rgb(255, 153, 28) ;
+}
+
+div#div_nova_tarefa {
+   background-color: white;
+   width: 200px;
+}
