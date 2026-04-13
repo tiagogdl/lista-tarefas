@@ -1,15 +1,18 @@
 @charset "UTF-8";
 
 body{
+    position: relative;
     width: 100vw;
     height: 100vh;
     margin: 0px;
     padding: 0px;
     background-color: rgb(253, 209, 155);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main{
-    margin: auto;
     background-color: white;
     height: 90vh;
     width: 90vw;
@@ -23,7 +26,7 @@ h1{
     text-align: center;
 }
 
-div {
+div#div_list {
     text-align: justify;
     margin-bottom: 10px;
     margin: 10px;
@@ -33,7 +36,7 @@ div {
     border-radius: 10px;
 }
 
-div::-webkit-scrollbar {
+div#div_list::-webkit-scrollbar {
     width: 0px;
     background: transparent;
 }
@@ -48,6 +51,46 @@ input {
 }
 
 div#div_nova_tarefa {
-   background-color: white;
-   width: 200px;
+   display: flex;
+   flex-direction: column;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+   background-color: rgb(255, 255, 255);
+   width: 300px;
+   height: 200px;
+   justify-content: space-between;
+   padding: 10px;
+   border-radius: 8px;
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.315);
+}
+
+input#nova_tarefa {
+   align-self: center;
+}
+
+input#text_nova_tarefa{
+    width: 220px;
+    border-radius: 5px;
+}
+
+input#text_data{
+    margin-left: 19px;
+    width: 120px;
+    border-radius: 5px;
+}
+
+div#overlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
 }
