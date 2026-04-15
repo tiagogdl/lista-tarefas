@@ -13,17 +13,19 @@
         <input id="button_nova_tarefa" type="button" value="+ Tarefa" onclick="adicionar()">
 
         <div id="div_list">
-            <ul>
+            <ul id="ul_tarefas">
                 <li>Testando</li>
             </ul>
         </div>
     </main>
+    
     <div id="overlay">
         <div id="div_nova_tarefa">
             <label for="text_nova_tarefa">Tarefa: <input type="text" name="text_nova_tarefa" id="text_nova_tarefa"> </label>
         
             <label for="text_data">Data:                 <input type="date" name="text_data" id="text_data"></label>
-            <input id="nova_tarefa" type="button" value="Adicionar">
+            <input id="nova_tarefa" type="button" value="Adicionar"
+            onclick="adicao_tarefa()">
         </div>
     </div>
     <script src="script.js"></script>
