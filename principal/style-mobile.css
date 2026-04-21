@@ -36,9 +36,21 @@ div#div_list {
     border-radius: 10px;
 }
 
+
 div#div_list::-webkit-scrollbar {
     width: 0px;
     background: transparent;
+}
+
+ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+li {
+    display: grid;
+    grid-template-columns: 1fr 40px 40px;
+    margin-top: 10px;
 }
 
 input {
@@ -93,4 +105,12 @@ div#overlay {
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(1px);
+}
+
+button.exc_edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    height: 25px;
 }
