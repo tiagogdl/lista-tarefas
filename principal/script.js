@@ -7,10 +7,12 @@ const input_data = document.querySelector('input#text_data')
 let guarda_tarefas = []
 let ul_tarefas = document.querySelector('ul#ul_tarefas')
 ul_tarefas.addEventListener('click', exc_edit)
+let id_global_edit = ''
 
 
 function adicionar () { // Faz aparecer modal para adicionar tarefa
     display_nova.style.display = 'flex'
+    input.value= ''
     input.focus()
 }
 
@@ -48,7 +50,11 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
     if (text_tarefa.length === 0) {
         window.alert('Tarefa Vazia!')
         
-    } else{
+    } else if (guarda_tarefas.find(li => li.id == id_global_edit)){
+        li.tarefa = text_tarefa
+        li.data = data
+        li.textContent = `${escrita_tarefa}`
+    } else {
         const _edit = document.createElement('button')
         _edit.innerHTML= '<i class="fa-regular fa-pen-to-square"></i>'
         _edit.setAttribute('class', 'exc_edit editar')
@@ -73,7 +79,30 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
 
 function exc_edit(event) {
     if (event.target.closest('.editar')) {
+        let ele_li = event.target.closest('li')
+        let id =  Number(ele_li.dataset.id)
+        id_global_edit = id
+
+        let li_id_edit = guarda_tarefas.find(li => li.id == id)
+        display_nova.style.display='flex'
+        input.value = li_id_edit.tarefa
+        input_data.value = li_id_edit.data
+
+        /*
+        let text_tarefa_edit = input.value
+        let data_edit = input_data.value
         
+        li_id_edit.tarefa = text_tarefa_edit
+        li_id_edit.data = data_edit
+        */
+
+    } else if (event.target.closest('.excluir')) {
+        let ele_li = event.target.closest('li')
+        let id =  Number(ele_li.dataset.id)
+
+        let novo_array = guarda_tarefas.filter(li => li.id !== id)
+        guarda_tarefas = novo_array
+        ele_li.remove()
     }
 }
 input.value=''
