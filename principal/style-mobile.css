@@ -60,8 +60,7 @@ li {
 
 li span {
     margin-top: 3px;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    word-break: break-all;
     white-space: normal;
     min-width: 0;
 }
