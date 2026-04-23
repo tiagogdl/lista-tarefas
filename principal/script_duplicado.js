@@ -3,6 +3,8 @@ const modal = document.querySelector('div#div_nova_tarefa')
 const display_nova = document.querySelector('div#overlay')
 const input = document.querySelector('input#text_nova_tarefa')
 const input_data = document.querySelector('input#text_data')
+input.value=''
+input_data.value=''
 let guarda_tarefas = []
 let ul_tarefas = document.querySelector('ul#ul_tarefas')
 ul_tarefas.addEventListener('click', exc_edit)
@@ -35,6 +37,9 @@ if (dados) {
         item_li.dataset.id = item.id
         ul_tarefas.appendChild(item_li)
 
+        if (item.status == 'concluído') {
+            span_text_tarefas.classList.add('concluido')
+        }
     });
 }
 
@@ -48,6 +53,23 @@ function adicionar () { // Faz aparecer modal para adicionar tarefa
 
 function fechar_adicionar () { // Some com o modal quando feito a condição abaixo
     display_nova.style.display = 'none'
+}
+
+function status(event) {
+    let li_span = event.target.closest('li')
+    let id_span = Number(li_span.dataset.id)
+    let status_li = guarda_tarefas.find(li => li.id == id_span)
+    let status_real = status_li.status
+    let span_status = event.target.closest('span')
+
+    if (status_real == 'pendente') {
+        span_status.classList.add('concluido')
+        status_li.status = 'concluído'
+    } else {
+        status_li.status = 'pendente'
+        span_status.classList.remove('concluido')
+    }
+    localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
 }
 
 display_nova.addEventListener('click', function (event){
@@ -113,13 +135,19 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         guarda_tarefas.push({
             tarefa: text_tarefa,
             data: data,
-            id: tempo_mil
+            id: tempo_mil,
+            status: 'pendente'
         })
         localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
     }
 }
 
-function exc_edit(event) {
+function exc_edit(event) { // função para validação se 'edição'
+
+    if (event.target.closest('span')) {
+            status(event)
+    }
+
     if (event.target.closest('.editar')) {
         let ele_li = event.target.closest('li')
         let id =  Number(ele_li.dataset.id)
@@ -130,7 +158,7 @@ function exc_edit(event) {
         input.value = li_id_edit.tarefa
         input_data.value = li_id_edit.data
 
-    } else if (event.target.closest('.excluir')) {
+    } else if (event.target.closest('.excluir')) { // função para exclusão de tarefas
         let ele_li = event.target.closest('li')
         let id =  Number(ele_li.dataset.id)
 
@@ -140,10 +168,8 @@ function exc_edit(event) {
         localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
     }
 }
-input.value=''
-input_data.value=''
 
-function formatar_data (data) {
+function formatar_data (data) { //Formatação da escrita da data
     if (!data) return ''
     const [ano, mes, dia] = data.split('-')
     return  `${dia}/${mes}/${ano}`

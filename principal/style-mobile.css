@@ -132,3 +132,10 @@ button.exc_edit {
     margin: 3px;
     height: 25px;
 }
+
+.concluido {
+    background-color: rgba(80, 248, 80, 0.966);
+    text-decoration: line-through;
+    border-radius: 5px;
+    padding: 5px;
+}
