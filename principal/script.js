@@ -60,12 +60,13 @@ display_nova.addEventListener('click', function (event){
 function adicao_tarefa() { // Executa processo de adição de tarefas e datas e salva no vetor
     const text_tarefa = input.value
     const data = input_data.value
+    let hoje = new Date()
     let data_br = new Date(data)
     let tempo_mil = new Date().getTime()
     let res_item_edit = guarda_tarefas.find(item_li => item_li.id == id_global_edit)
 
     if (data) { //Validação se data Inválida
-        if (data_br < new Date ()) {
+        if (data_br.getHours(0,0,0,0) < hoje.getHours(0,0,0,0)) {
            window.alert('Data Inválida!')
             input_data.value=''
             input_data.focus()
