@@ -8,6 +8,37 @@ let guarda_tarefas = []
 let ul_tarefas = document.querySelector('ul#ul_tarefas')
 ul_tarefas.addEventListener('click', exc_edit)
 let id_global_edit = ''
+let dados = localStorage.getItem('tarefas')
+
+if (dados) {
+    guarda_tarefas= JSON.parse(dados)
+    guarda_tarefas.forEach(item => {
+        if (item.data) { //Validação se data Inválida
+            escrita_tarefa = `${item.tarefa} - Data: ${formatar_data(item.data)}`
+        } else { //Construção da forma de escrita
+            escrita_tarefa = item.tarefa
+        }
+
+        let span_text_tarefas = document.createElement('span')
+        span_text_tarefas.textContent= `${escrita_tarefa}`
+
+        const _edit = document.createElement('button')
+        _edit.innerHTML= '<i class="fa-regular fa-pen-to-square"></i>'
+        _edit.setAttribute('class', 'exc_edit editar')
+
+        const _exc = document.createElement('button')
+        _exc.innerHTML= '<i class="fa-solid fa-trash-can"></i>'
+        _exc.setAttribute('class', 'exc_edit excluir')
+
+        var item_li = document.createElement('li')
+        item_li.append(span_text_tarefas,_edit, _exc)
+
+        item_li.dataset.id = item.id
+        ul_tarefas.appendChild(item_li)
+
+    });
+}
+
 
 
 function adicionar () { // Faz aparecer modal para adicionar tarefa
@@ -34,15 +65,13 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
     let res_item_edit = guarda_tarefas.find(item_li => item_li.id == id_global_edit)
 
     if (data) { //Validação se data Inválida
-        if (data_br >= new Date ()) {
-           data_br = data_br.toLocaleDateString('pt-br')
-        } else {
-            window.alert('Data Inválida!')
+        if (data_br < new Date ()) {
+           window.alert('Data Inválida!')
             input_data.value=''
             input_data.focus()
             return
-        }
-       var escrita_tarefa = `${text_tarefa} - Data: ${data_br}`
+        } 
+       var escrita_tarefa = `${text_tarefa} - Data: ${formatar_data(data)}`
     } else { //Construção da forma de escrita
         escrita_tarefa = text_tarefa
     }
@@ -56,9 +85,10 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         let item_span = item_id.querySelector('span')
         
         res_item_edit.tarefa=`${text_tarefa}`
-        res_item_edit.data=`${data_br}`
+        res_item_edit.data= data
         item_span.textContent=`${escrita_tarefa}`
-
+        
+        localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
         display_nova.style.display = 'none'
         id_global_edit = ''
     } else { //Parte prática da adição de tarefas novas
@@ -82,9 +112,10 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         
         guarda_tarefas.push({
             tarefa: text_tarefa,
-            data: data_br,
+            data: data,
             id: tempo_mil
         })
+        localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
     }
 }
 
@@ -106,7 +137,14 @@ function exc_edit(event) {
         let novo_array = guarda_tarefas.filter(li => li.id !== id)
         guarda_tarefas = novo_array
         ele_li.remove()
+        localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
     }
 }
 input.value=''
 input_data.value=''
+
+function formatar_data (data) {
+    if (!data) return ''
+    const [ano, mes, dia] = data.split('-')
+    return  `${dia}/${mes}/${ano}`
+}
