@@ -54,11 +54,12 @@ ul{
 li {
     display: grid;
     grid-template-columns: 1fr 40px 40px;
-    margin-top: 13px;
+    margin-top: 10px;
     
 }
 
 li span {
+    margin-top: 3px;
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
