@@ -4,6 +4,7 @@
     margin: 0px;
     padding: 0px;
 }
+
 body{
     position: relative;
     width: 100vw;
@@ -28,6 +29,7 @@ main{
 
 h1{
     text-align: center;
+    margin: 20px;
 }
 
 div#div_list {
