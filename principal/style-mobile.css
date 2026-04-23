@@ -59,7 +59,6 @@ li {
 }
 
 li span {
-    text-align: justify;
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
