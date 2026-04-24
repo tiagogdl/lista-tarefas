@@ -116,6 +116,8 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
         display_nova.style.display = 'none'
         id_global_edit = ''
+
+        
     } else { //Parte prática da adição de tarefas novas
         const _edit = document.createElement('button')
         _edit.innerHTML= '<i class="fa-regular fa-pen-to-square"></i>'
