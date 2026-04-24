@@ -19,7 +19,7 @@ if (dados) { // Carregamento de Dados
         span_text_tarefas.textContent= item.tarefa
 
         let span_text_data = document.createElement('span')
-        span_text_data.textContent= `Data: ${formatar_data(item.data)}`
+        span_text_data.textContent= item.data ? `Data: ${formatar_data(item.data)}` : ''
 
         const _edit = document.createElement('button')
         _edit.innerHTML= '<i class="fa-regular fa-pen-to-square"></i>'
@@ -108,7 +108,7 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         let span_data = item_span[1]
         
         span_texto.textContent= text_tarefa
-        span_data.textContent= `Data: ${formatar_data(data)}`
+        span_data.textContent= data ? `Data: ${formatar_data(data)}` : ''
         
         res_item_edit.tarefa= text_tarefa
         res_item_edit.data= data
@@ -132,7 +132,7 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         span_text_tarefas.textContent= text_tarefa
 
         let span_text_data = document.createElement('span')
-        span_text_data.textContent=`Data: ${formatar_data(data)}`
+        span_text_data.textContent= data ? `Data: ${formatar_data(data)}` : ''
         
         div_spans.append(span_text_tarefas, span_text_data)
         item_li.append(div_spans, _edit, _exc)
