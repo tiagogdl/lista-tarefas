@@ -64,11 +64,17 @@ li {
     
 }
 
+li div {
+    display: flex;
+    flex-direction: column;
+}
+
 li span {
     margin-top: 3px;
     word-break: break-all;
     white-space: normal;
     min-width: 0;
+    display: block;
 }
 
 input {
@@ -138,4 +144,5 @@ button.exc_edit {
     text-decoration: line-through;
     border-radius: 5px;
     padding: 5px;
+    transition: 0.2s;
 }

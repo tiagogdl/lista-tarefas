@@ -11,17 +11,15 @@ ul_tarefas.addEventListener('click', exc_edit)
 let id_global_edit = ''
 let dados = localStorage.getItem('tarefas')
 
-if (dados) {
+if (dados) { // Carregamento de Dados
     guarda_tarefas= JSON.parse(dados)
     guarda_tarefas.forEach(item => {
-        if (item.data) { //Validação se data Inválida
-            escrita_tarefa = `${item.tarefa} - Data: ${formatar_data(item.data)}`
-        } else { //Construção da forma de escrita
-            escrita_tarefa = item.tarefa
-        }
 
         let span_text_tarefas = document.createElement('span')
-        span_text_tarefas.textContent= `${escrita_tarefa}`
+        span_text_tarefas.textContent= item.tarefa
+
+        let span_text_data = document.createElement('span')
+        span_text_data.textContent= `Data: ${formatar_data(item.data)}`
 
         const _edit = document.createElement('button')
         _edit.innerHTML= '<i class="fa-regular fa-pen-to-square"></i>'
@@ -31,14 +29,18 @@ if (dados) {
         _exc.innerHTML= '<i class="fa-solid fa-trash-can"></i>'
         _exc.setAttribute('class', 'exc_edit excluir')
 
+        let div_spans = document.createElement('div')
+        div_spans.classList.add('div_spans')
         var item_li = document.createElement('li')
-        item_li.append(span_text_tarefas,_edit, _exc)
+
+        div_spans.append(span_text_tarefas,span_text_data)
+        item_li.append(div_spans, _edit, _exc)
 
         item_li.dataset.id = item.id
         ul_tarefas.appendChild(item_li)
 
-        if (item.status == 'concluído') {
-            span_text_tarefas.classList.add('concluido')
+        if (item.status == 'concluido') {
+            div_spans.classList.add('concluido')
         }
     });
 }
@@ -55,19 +57,19 @@ function fechar_adicionar () { // Some com o modal quando feito a condição aba
     display_nova.style.display = 'none'
 }
 
-function status(event) {
+function status(event) { // Função para deixar tarefa concluída
     let li_span = event.target.closest('li')
     let id_span = Number(li_span.dataset.id)
     let status_li = guarda_tarefas.find(li => li.id == id_span)
     let status_real = status_li.status
-    let span_status = event.target.closest('span')
+    let div_status = event.target.closest('div.div_spans')
 
     if (status_real == 'pendente') {
-        span_status.classList.add('concluido')
-        status_li.status = 'concluído'
+        div_status.classList.add('concluido')
+        status_li.status = 'concluido'
     } else {
         status_li.status = 'pendente'
-        span_status.classList.remove('concluido')
+        div_status.classList.remove('concluido')
     }
     localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
 }
@@ -86,16 +88,13 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
     let tempo_mil = new Date().getTime()
     let res_item_edit = guarda_tarefas.find(item_li => item_li.id == id_global_edit)
 
-    if (data) { //Validação se data Inválida
+    if (data) {
         if (data_br.getHours(0,0,0,0) < hoje.getHours(0,0,0,0)) {
-           window.alert('Data Inválida!')
+            window.alert('Data Inválida!')
             input_data.value=''
             input_data.focus()
             return
-        } 
-       var escrita_tarefa = `${text_tarefa} - Data: ${formatar_data(data)}`
-    } else { //Construção da forma de escrita
-        escrita_tarefa = text_tarefa
+        }
     }
 
     if (text_tarefa.length === 0) { 
@@ -104,11 +103,15 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
     } else //Validação se existe edição para fazer
         if (res_item_edit){
         let item_id = document.querySelector(`li[data-id="${id_global_edit}"]`)
-        let item_span = item_id.querySelector('span')
+        let item_span = item_id.querySelectorAll('span')
+        let span_texto = item_span[0]
+        let span_data = item_span[1]
         
-        res_item_edit.tarefa=`${text_tarefa}`
+        span_texto.textContent= text_tarefa
+        span_data.textContent= `Data: ${formatar_data(data)}`
+        
+        res_item_edit.tarefa= text_tarefa
         res_item_edit.data= data
-        item_span.textContent=`${escrita_tarefa}`
         
         localStorage.setItem('tarefas', JSON.stringify(guarda_tarefas))
         display_nova.style.display = 'none'
@@ -123,10 +126,16 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
         _exc.setAttribute('class', 'exc_edit excluir')
 
         var item_li = document.createElement('li')
+        let div_spans = document.createElement('div')
+        div_spans.setAttribute('class', 'div_spans')
         let span_text_tarefas = document.createElement('span')
+        span_text_tarefas.textContent= text_tarefa
 
-        span_text_tarefas.textContent = `${escrita_tarefa}`
-        item_li.append(span_text_tarefas,_edit, _exc)
+        let span_text_data = document.createElement('span')
+        span_text_data.textContent=`Data: ${formatar_data(data)}`
+        
+        div_spans.append(span_text_tarefas, span_text_data)
+        item_li.append(div_spans, _edit, _exc)
         ul_tarefas.appendChild(item_li)
 
         display_nova.style.display = 'none'
@@ -144,7 +153,7 @@ function adicao_tarefa() { // Executa processo de adição de tarefas e datas e 
 
 function exc_edit(event) { // função para validação se 'edição'
 
-    if (event.target.closest('span')) {
+    if (event.target.closest('div.div_spans')) {
             status(event)
     }
 
