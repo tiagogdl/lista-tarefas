@@ -17,8 +17,8 @@
                         </div>
                     </div>
                     <div class="flex justify-center items-center w-full">
-                        <UButton @click="NovaTarefa()">
-                            Adicionar
+                        <UButton @click="NovaTarefa()" class="min-w-[100px] justify-center items-center">
+                            {{ props.edit ? 'Editar' : 'Adicionar' }}
                         </UButton>
                     </div>
                 </div>
@@ -27,6 +27,7 @@
 
 <script setup>
 import { useUserStore } from '../stores/todos';
+import { ref, watch} from 'vue';
 const UserStore = useUserStore()
 const props = defineProps({
     open: {
@@ -37,6 +38,10 @@ const props = defineProps({
         type: Object
     },
 
+    edit: {
+        type: Boolean
+    }
+
 })
 
 const emits = defineEmits(['close'])
@@ -44,16 +49,25 @@ const emits = defineEmits(['close'])
 const TarefaText = ref('')
 const TarefaData = ref('')
 
-if (props.tarefa) {
-    TarefaText.value = props.tarefa.text
-    TarefaData.value = props.tarefa.data
-}
+watch(function(){
+    return props.tarefa
+    },
+    function (NovaEdição) {
+        if (NovaEdição) {
+            TarefaText.value = NovaEdição.text
+            TarefaData.value = NovaEdição.data
+        } else {
+            TarefaText.value = ''
+            TarefaData.value = ''
+        }
+    }
+)
 
 function NovaTarefa() {
     UserStore.addTarefa({
         text: TarefaText.value,
         data: TarefaData.value,
-        id: new Date().getTime()
+        id: props.tarefa ? props.tarefa.id : new Date().getTime()
     })
 
     TarefaText.value = ''
