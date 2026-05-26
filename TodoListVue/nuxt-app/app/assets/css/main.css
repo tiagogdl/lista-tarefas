@@ -4,3 +4,12 @@
 @theme {
     --color-primary: #206efe;
 }
+
+html {
+    color-scheme: light;
+}
+
+body {
+    background-color: white;
+    color: black
+}
