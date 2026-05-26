@@ -1,5 +1,5 @@
 <template>
-        <div v-if="ModalOpen" @click="ModalOpen = !ModalOpen"
+        <div v-if="props.open" @click="emits('close')"
          class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
                 <div @click.stop="" class="w-[300px] h-[250px] rounded-2xl p-4 bg-sky-200 flex flex-col justify-between">
                     <div class="grid grid-cols-[60px_1fr]">
@@ -28,10 +28,26 @@
 <script setup>
 import { useUserStore } from '../stores/todos';
 const UserStore = useUserStore()
+const props = defineProps({
+    open: {
+        type: Boolean
+    },
 
-const ModalOpen = ref(true)
+    tarefa: {
+        type: Object
+    },
+
+})
+
+const emits = defineEmits(['close'])
+
 const TarefaText = ref('')
 const TarefaData = ref('')
+
+if (props.tarefa) {
+    TarefaText.value = props.tarefa.text
+    TarefaData.value = props.tarefa.data
+}
 
 function NovaTarefa() {
     UserStore.addTarefa({
@@ -40,6 +56,8 @@ function NovaTarefa() {
         id: new Date().getTime()
     })
 
-    ModalOpen.value = false
+    TarefaText.value = ''
+    TarefaData.value = ''
+    emits('close')
 }
 </script>

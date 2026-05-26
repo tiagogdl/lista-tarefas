@@ -10,5 +10,9 @@ export const useUserStore = defineStore('tarefas', function(){
         tarefas.value.push(tarefa)
     }
 
-    return { tarefas, addTarefa }
+    function editTarefa(tarefa, id) {
+
+    }
+
+    return { tarefas, addTarefa, editTarefa }
 })

@@ -1,13 +1,12 @@
 <template>
-    <UButton icon="i-ei-plus" color="primary" @click="ModalOpen = !ModalOpen"
+    <UButton class="mb-8" icon="i-ei-plus" color="primary" @click="emit('abrir')"
     >
         Nova tarefa
     </UButton>
-    <ModalForm  v-if="ModalOpen" />
 </template>
 
 <script setup>
 import { ref } from 'vue';
-const ModalOpen = ref(false)
+const emit = defineEmits(['abrir'])
 
 </script>
