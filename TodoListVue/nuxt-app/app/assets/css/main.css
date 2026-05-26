@@ -6,10 +6,10 @@
 }
 
 html {
-    color-scheme: light;
+    color-scheme: light !important;
 }
 
 body {
-    background-color: white;
-    color: black
+    background-color: white !important;
+    color: black !important;
 }
