@@ -17,6 +17,7 @@ export const useUserStore = defineStore('tarefas', function(){
         if (infoTar) {
            infoTar.text = info.text
            infoTar.data = info.data
+           infoTar.completed = false
         } else {
             tarefas.value.push(info)
         }
@@ -36,6 +37,15 @@ export const useUserStore = defineStore('tarefas', function(){
             localStorage.setItem('tarefas', JSON.stringify(tarefas.value))
         }
     }
+
+    watch(tarefas, function(){
+            SalvarStorage()
+        },
+        {
+            deep: true
+        }
+    )
+
 
     return { tarefas, addTarefa, excluirTarefa}
 })

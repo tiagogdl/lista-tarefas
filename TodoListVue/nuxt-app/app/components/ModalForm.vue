@@ -1,17 +1,17 @@
 <template>
         <div v-if="props.open" @click="emits('close')"
          class="fixed inset-0 z-50 flex justify-center items-center bg-black/40 backdrop-blur-sm">
-                <div @click.stop="" class="w-[350px] h-[280px] rounded-3xl p-8 bg-white shadow-2xl text-black flex flex-col justify-between">
+                <div @click.stop="" class="w-[350px] h-[280px] rounded-3xl p-8 bg-branco shadow-2xl text-textBW flex flex-col justify-between">
                     <div class="grid grid-cols-[60px_1fr]">
                         <div class="flex flex-col gap-12">
                             <label for="tarefa" class="py-2">Tarefa: </label>
                             <label for="data" class="py-2">Data: </label>
                         </div>
                         <div class="flex flex-col gap-12">
-                            <input type="text" name="tarefa" id="tarefa" class="bg-white w-full border border-slate-400 rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
+                            <input type="text" name="tarefa" id="tarefa" class="bg-branco w-full border border-textSlate400 rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
                             v-model="TarefaText" placeholder=" Digite sua tarefa"
                             >
-                            <input type="date" name="data" id="data" class="bg-white w-full border border-slate-400 rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
+                            <input type="date" name="data" id="data" class="bg-branco w-full border border-textSlate400  rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
                             v-model="TarefaData"
                             >
                         </div>
@@ -67,7 +67,8 @@ function NovaTarefa() {
     UserStore.addTarefa({
         text: TarefaText.value,
         data: TarefaData.value,
-        id: props.tarefa ? props.tarefa.id : new Date().getTime()
+        id: props.tarefa ? props.tarefa.id : new Date().getTime(),
+        completed: props.tarefa ? props.tarefa.completed : false
     })
 
     TarefaText.value = ''

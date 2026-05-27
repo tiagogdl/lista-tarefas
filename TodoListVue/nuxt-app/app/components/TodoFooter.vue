@@ -1,5 +1,5 @@
 <template>
-    <UFooter class="text-slate-500 text-sm border-t border-slate-200">
+    <UFooter class="text-textSlate500 text-sm border-t border-fundoGradi-t">
         <template #left>
             <div class="flex items-center h-full">
                 <p class="text-[20px] max-sm:hidden">&copy; {{ new Date().getFullYear() }}</p>
@@ -8,9 +8,9 @@
 
         <template #right>
             <div class="flex ">
-                <UIcon name="i-fa-code-fork" size="28" class="text-[#206efe] mr-2" />
+                <UIcon name="i-fa-code-fork" size="28" class="text-primary mr-2" />
                 <p>
-                    Desenvolvido por <a class="text-[#206efe] font-bold" href="https://github.com/tiagogdl" target="_blank">Tiago Dias</a></p>
+                    Desenvolvido por <a class="text-primary font-bold" href="https://github.com/tiagogdl" target="_blank">Tiago Dias</a></p>
             </div>
         </template>
 

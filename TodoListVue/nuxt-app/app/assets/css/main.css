@@ -5,6 +5,28 @@
 
 @theme {
     --color-primary: #206efe;
+    --color-fundoGradi-f: #f1f5f9;
+    --color-fundoGradi-t: #e2e8f0;
+    --color-branco: #ffffff;
+    --color-textSlate400: #94a3b8;
+    --color-textSlate300: #cbd5e1;
+    --color-textSlate500: #64748b;
+    --color-textBW: #000;
+}
+
+.dark {
+     --color-primary: #22c55e;
+
+    --color-fundoGradi-f: #0f172a;
+    --color-fundoGradi-t: #1e293b;
+
+    --color-branco: #1e293b;
+
+    --color-textSlate400: #94a3b8;
+    --color-textSlate300: #cbd5e1;
+    --color-textSlate500: #e2e8f0;
+
+    --color-textBW: #ffffff;
 }
 
 html {
