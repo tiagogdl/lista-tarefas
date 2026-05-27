@@ -1,5 +1,5 @@
 <template>
-    <UFooter class="text-textSlate500 text-sm border-t border-fundoGradi-t">
+    <UFooter class="text-textSlate500 text-sm border-t border-fundoGradi-t pb-[calc(env(safe-area-inset-bottom)+16px)]">
         <template #left>
             <div class="flex items-center h-full max-sm:hidden">
                 <p class="text-[20px]">&copy; {{ new Date().getFullYear() }}</p>
