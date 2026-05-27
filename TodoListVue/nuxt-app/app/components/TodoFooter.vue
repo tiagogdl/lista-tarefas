@@ -1,8 +1,8 @@
 <template>
     <UFooter class="text-textSlate500 text-sm border-t border-fundoGradi-t">
         <template #left>
-            <div class="flex items-center h-full">
-                <p class="text-[20px] max-sm:hidden">&copy; {{ new Date().getFullYear() }}</p>
+            <div class="flex items-center h-full max-sm:hidden">
+                <p class="text-[20px]">&copy; {{ new Date().getFullYear() }}</p>
             </div>
         </template>
 

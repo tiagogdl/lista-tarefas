@@ -34,7 +34,8 @@ html {
 }
 
 body {
-    background-color: white !important;
     color: black !important;
-    font-family: 'Inter', sans-se;
+    font-family: 'Inter', sans-serif;
+    min-height: 100dvh;
+    overflow: hidden;
 }

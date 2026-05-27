@@ -1,5 +1,5 @@
 <template>
-    <UContainer class=" max-w-2xl md:shadow-xl bg-branco md:rounded-b-3xl border border-fundoGradi-f">
+    <UContainer class="max-w-2xl md:shadow-xl bg-branco md:rounded-b-3xl border border-fundoGradi-f">
         <div class="overflow-hidden mb-10 w-full h-full">
             <ButtonForm @abrir="ModalAberto = true" />
             <TarefasTodo @editar="abrirEdicao" @excluir="excluirTarefa"/>
