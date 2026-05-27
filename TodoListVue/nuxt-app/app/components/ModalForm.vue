@@ -1,23 +1,23 @@
 <template>
         <div v-if="props.open" @click="emits('close')"
-         class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
-                <div @click.stop="" class="w-[300px] h-[250px] rounded-2xl p-4 bg-sky-200 text-black flex flex-col justify-between">
+         class="fixed inset-0 z-50 flex justify-center items-center bg-black/40 backdrop-blur-sm">
+                <div @click.stop="" class="w-[350px] h-[280px] rounded-3xl p-8 bg-white shadow-2xl text-black flex flex-col justify-between">
                     <div class="grid grid-cols-[60px_1fr]">
-                        <div class="flex flex-col gap-20">
-                            <label for="tarefa">Tarefa: </label>
-                            <label for="data">Data: </label>
+                        <div class="flex flex-col gap-12">
+                            <label for="tarefa" class="py-2">Tarefa: </label>
+                            <label for="data" class="py-2">Data: </label>
                         </div>
-                        <div class="flex flex-col gap-20">
-                            <input type="text" name="tarefa" id="tarefa" class="bg-white rounded-[8px] w-full"
-                            v-model="TarefaText"
+                        <div class="flex flex-col gap-12">
+                            <input type="text" name="tarefa" id="tarefa" class="bg-white w-full border border-slate-400 rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
+                            v-model="TarefaText" placeholder=" Digite sua tarefa"
                             >
-                            <input type="date" name="data" id="data" class="bg-white rounded-[8px] w-full"
+                            <input type="date" name="data" id="data" class="bg-white w-full border border-slate-400 rounded-xl px-3 py-2 focus:ring-2 focus:ring-primary outline-none"
                             v-model="TarefaData"
                             >
                         </div>
                     </div>
-                    <div class="flex justify-center items-center w-full">
-                        <UButton @click="NovaTarefa()" class="min-w-[100px] justify-center items-center">
+                    <div class="flex justify-center items-center w-full mt-12">
+                        <UButton @click="NovaTarefa()" class="min-w-[150px] py-3 justify-center items-center shadow-md hover:shadow-lg transition">
                             {{ props.edit ? 'Editar' : 'Adicionar' }}
                         </UButton>
                     </div>

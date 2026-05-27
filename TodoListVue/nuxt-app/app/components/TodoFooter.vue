@@ -1,5 +1,5 @@
 <template>
-    <UFooter>
+    <UFooter class="text-slate-500 text-sm border-t border-slate-200">
         <template #left>
             <div class="flex items-center h-full">
                 <p class="text-[20px] max-sm:hidden">&copy; {{ new Date().getFullYear() }}</p>

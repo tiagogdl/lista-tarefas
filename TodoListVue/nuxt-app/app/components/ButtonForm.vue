@@ -1,5 +1,5 @@
 <template>
-    <UButton class="mb-8" icon="i-ei-plus" color="primary" @click="emit('abrir')"
+    <UButton size="xl" class="mb-8 mt-8 shadow-md hover:shadow-lg transition" icon="i-ei-plus" color="primary" @click="emit('abrir')"
     >
         Nova tarefa
     </UButton>
